@@ -15,13 +15,16 @@ const ReviewPage = () => {
   const fetchData = () => {
     const postComment = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/api/v1/comment/add", {
-          userId: 1,
-          artworkId: 1,
-          description: description,
-        });
+        const response = await axios.post(
+          "http://localhost:3000/api/v1/comment/add",
+          {
+            userId: 2,
+            artworkId: 3,
+            description: description,
+          }
+        );
         console.log(response.data);
-        navigate('/CardSlider')
+        navigate("/CardSlider");
       } catch (e) {
         console.error("Error posting comment:", e);
       }
@@ -83,7 +86,6 @@ export default ReviewPage;
 
 // Styled Components 정의는 그대로 유지
 
-
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,7 +94,6 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-
 `;
 
 const Header = styled.h1`
@@ -129,7 +130,7 @@ const Input = styled.input`
 `;
 
 const Textarea = styled.textarea`
-margin-top: 15px;
+  margin-top: 15px;
   width: 100%;
   height: 250px;
   padding: 10px;
@@ -171,10 +172,14 @@ const OptionText = styled.span`
   color: ${({ isSelected }) => (isSelected ? "#333" : "#aaa")};
   cursor: pointer;
   padding: 5px 10px; /* 네모 박스처럼 보이도록 패딩 추가 */
-  background-color: ${({ isSelected }) => (isSelected ? "#FFDDD4" : "#f2f2f2")}; /* 선택된 항목에 배경 추가 */
+  background-color: ${({ isSelected }) =>
+    isSelected ? "#FFDDD4" : "#f2f2f2"}; /* 선택된 항목에 배경 추가 */
   border-radius: 5px; /* 네모를 둥글게 */
-  
+
   &:hover {
-    background-color: ${({ isSelected }) => (isSelected ? "#FFDDD4" : "#f0f0f0")}; /* 선택된 경우와 미선택된 경우 배경 색상 변경 */
+    background-color: ${({ isSelected }) =>
+      isSelected
+        ? "#FFDDD4"
+        : "#f0f0f0"}; /* 선택된 경우와 미선택된 경우 배경 색상 변경 */
   }
 `;

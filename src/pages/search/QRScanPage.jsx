@@ -11,27 +11,17 @@ const QRScanPage = () => {
   const videoRef = useRef(null);
 
   // QR 코드 스캔 결과 처리
+
   const handleScan = async (data) => {
     if (data) {
       try {
         const parsedData = JSON.parse(data);
         setQrData(parsedData); // QR 데이터 저장
 
-        // 서버로 데이터 전송
-        try {
-          const response = await axios.post("http://localhost:3000/api/v1/user/gallery", {
-            userId: 1,
-            galleryId: 2,
-          });
+        console.log("서버 응답:", response.data);
 
-          console.log("서버 응답:", response.data);
-
-          // 서버 응답 데이터를 포함하여 다음 페이지로 이동
-          navigate("/QRDataPage", { state: { qrData: response} });
-        } catch (error) {
-          console.error("서버 요청 실패:", error);
-          setQrError(true);
-        }
+        // 서버 응답 데이터를 포함하여 다음 페이지로 이동
+        navigate("/QRDataPage", { state: { qrData: parsedData } });
       } catch (error) {
         console.error("QR 데이터 파싱 실패:", error);
         setQrError(true);
@@ -39,9 +29,9 @@ const QRScanPage = () => {
     }
   };
 
-
   useEffect(() => {
     QrScanner.hasCamera().then((hasCamera) => {
+      console.log("실행됨");
       if (!hasCamera) {
         setQrError(true);
       } else {
@@ -89,7 +79,9 @@ const QRScanPage = () => {
         {qrError && (
           <ErrorMessage>
             <p>카메라를 사용할 수 없습니다.</p>
-            <small>카메라 권한을 허용하거나 QR 리더기를 직접 실행해주세요.</small>
+            <small>
+              카메라 권한을 허용하거나 QR 리더기를 직접 실행해주세요.
+            </small>
           </ErrorMessage>
         )}
       </ScanContainer>
