@@ -21,11 +21,13 @@ const GalleryPage = () => {
         ))}
       </PhotoList>
       <Pagination>
+      <PageNumber>&lt;</PageNumber>
         <PageNumber>1</PageNumber>
         <PageNumber>2</PageNumber>
         <PageNumber>3</PageNumber>
         <PageNumber>4</PageNumber>
         <PageNumber>5</PageNumber>
+        <PageNumber>&gt;</PageNumber>
       </Pagination>
     </MainContainer>
   );
@@ -47,23 +49,24 @@ const Header = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `;
-  
+
 const HeadText = styled.h1`
   font-size: 24px;
   color: #333;
 `;
 
 const AddPhotoButton = styled.button`
-  background-color: #007bff;
+  background-color: #F3C3B7;
   color: white;
   font-size: 14px;
-  padding: 10px 15px;
+  width:100px;
+  height:35px;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #D99E8F;
   }
 `;
 
