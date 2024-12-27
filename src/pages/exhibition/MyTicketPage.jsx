@@ -17,7 +17,9 @@ const MyTicketPage = () => {
 
   return (
     <MainContainer>
-      <Header>나의 티켓</Header>
+      <Header>
+      <HeaderText>나의 티켓</HeaderText>  
+      </Header>
 
       <TicketPreview>
         <PreviewBox onClick={handleClick}/>
@@ -31,11 +33,15 @@ const MyTicketPage = () => {
 
 
       <Pagination>
+      <PageNumber>&lt;</PageNumber>
         <PageNumber>1</PageNumber>
         <PageNumber>2</PageNumber>
         <PageNumber>3</PageNumber>
         <PageNumber>4</PageNumber>
         <PageNumber>5</PageNumber>
+        <PageNumber>&gt;</PageNumber>
+        
+
       </Pagination>
     </MainContainer>
   );
@@ -52,11 +58,17 @@ const MainContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const Header = styled.h1`
-  font-size: 24px;
-  color: #333;
+const Header = styled.div`
   margin-bottom: 20px;
+  margin-left:50px;
+  width:100%;
 `;
+
+const HeaderText = styled.h1`
+font-size: 24px;
+  color: #333;
+`
+
 
 const TicketPreview = styled.div`
  
@@ -86,7 +98,7 @@ const TicketList = styled.div`
   flex-direction: column;
   justify-content:center;
   align-items:center;
-  gap: 20px;
+  gap: 5px;
 `;
 
 const Pagination = styled.div`

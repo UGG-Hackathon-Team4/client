@@ -24,14 +24,16 @@ const TicketItem = ({ data }) => {
 export default TicketItem;
 
 const TicketContainer = styled.div`
-  width: 332px;
+  width: 305px;
   height: auto;
-  cursor: pointer;
+
+
 `;
 
 const TicketBackground = styled.div`
   width: 100%;
   height: 162px;
+
   background: url("/public/ticket.png") no-repeat center/contain;
   display: flex;
   align-items: center;
@@ -42,6 +44,7 @@ const TicketBackground = styled.div`
 const TicketContent = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left:20px;
 `;
 
 const TicketDate = styled.div`

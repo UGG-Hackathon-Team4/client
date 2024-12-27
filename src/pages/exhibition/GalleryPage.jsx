@@ -47,7 +47,7 @@ const Header = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `;
-
+  
 const HeadText = styled.h1`
   font-size: 24px;
   color: #333;
