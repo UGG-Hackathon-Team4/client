@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QrReader from "react-qr-scanner";
 
 const QRScanPage = () => {
   const [qrData, setQrData] = useState(null);
+  const navigate = useNavigate();
 
   const handleScan = (data) => {
     if (data) {
-      setQrData(JSON.parse(data.text));
+    console.log(JSON.parse(data.text));
+      setQrData(JSON.parse(data.text)); // QR 데이터 파싱
+      navigate("/nextPage", { state: { qrData: JSON.parse(data.text) } }); // 다음 페이지로 이동
     }
   };
 
@@ -17,10 +21,7 @@ const QRScanPage = () => {
 
   return (
     <MainContainer>
-      <Header>
-        <BackButton onClick={() => window.history.back()}>&lt;</BackButton>
-        QR을 스캔하세요
-      </Header>
+      <Header>QR을 스캔하세요</Header>
       <ScanContainer>
         <QrReader
           delay={300}
@@ -55,16 +56,12 @@ const MainContainer = styled.div`
 const Header = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   font-size: 20px;
   color: #333;
   margin-bottom: 20px;
-`;
-
-const BackButton = styled.span`
-  font-size: 20px;
-  margin-right: 10px;
-  cursor: pointer;
+  font-weight: bold;
 `;
 
 const ScanContainer = styled.div`

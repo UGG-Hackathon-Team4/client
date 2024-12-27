@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const TicketItem = ({ticket}) => {
+    const navigate = useNavigate();
+    const handleClick = ()=>{
+        navigate('/GalleryPage');
+    }
 
     return (
-      <Container>
+      <Container onClick={handleClick}>
         <TicketInfo>
           <InfoRow>
             <Label>전시명{ticket}</Label>

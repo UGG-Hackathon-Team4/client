@@ -1,43 +1,41 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const RootLayout = () => {
-    return (
-      <>
-<Outlet />
-      </>
-    );
-  };
+  const navigate = useNavigate();
+  const location = useLocation();
 
-/*   <Header>App Header</Header>
-  <MainContent>
-    <ContentWrapper>
-      <Outlet />
-    </ContentWrapper>
-  </MainContent>
-  <Footer>
-    <a href="/">Home</a>
-    <a href="/">Profile</a>
-    <a href="/">Settings</a>
-  </Footer> */
+  // 숨기고 싶은 페이지 설정
+  const hideHeaderPaths = ["/", "/MyTicketPage"];
+  const shouldHideHeader = hideHeaderPaths.includes(location.pathname);
 
+  return (
+    <MainContainer>
+      {!shouldHideHeader && (
+        <Header>
+          <BackButton onClick={() => navigate(-1)}>&lt;</BackButton> 
+        </Header>
+      )}
+      <ContentWrapper shouldHideHeader={shouldHideHeader}>
+        <Outlet />
+      </ContentWrapper>
+    </MainContainer>
+  );
+};
 
-const MainContent = styled.div`
+const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #f8f9fa;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  width: 100vw;
 `;
 
 const Header = styled.header`
   height: 60px;
-  background-color: #007bff;
-  color: white;
+  color: black;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 18px;
   font-weight: bold;
   position: fixed;
@@ -45,35 +43,22 @@ const Header = styled.header`
   width: 100%;
   z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
 `;
 
-const Footer = styled.footer`
-  height: 60px;
-  background-color: #ffffff;
-  border-top: 1px solid #ddd;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 1000;
-
-  & a {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 14px;
-  }
+const BackButton = styled.button`
+  background: none;
+  border: none;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
 `;
 
 const ContentWrapper = styled.div`
+  margin-top: ${({ shouldHideHeader }) => (shouldHideHeader ? "0" : "60px")}; /* Header가 없으면 margin-top 제거 */
   flex: 1;
-  margin-top: 60px; 
-  margin-bottom: 60px; 
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-y: auto; /* 콘텐츠가 길 경우 스크롤 가능 */
+  padding-top: 20px; /* 내부 콘텐츠에 간격 추가 */
 `;
-
-
 
 export default RootLayout;

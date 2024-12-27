@@ -6,6 +6,10 @@ import RootLayout from "./layout/root-layout";
 import MyTicketPage from './pages/exhibition/MyTicketPage';
 import MainPage from './pages/MainPage';
 import QRScanPage from './pages/search/QRScanPage';
+import QRGenerator from './pages/search/QRGenerator.jsx';
+import GalleryPage from "./pages/exhibition/GalleryPage.jsx";
+import SearchPhotoPage from './pages/search/SearchPhotoPage';
+
 //라우터
 const router = createBrowserRouter([
   {
@@ -24,6 +28,18 @@ const router = createBrowserRouter([
         path: '/QRScanPage',
         element: <QRScanPage/>
       },
+      {
+        path: '/QRGenerator',
+        element: <QRGenerator/>
+      },
+      {
+        path: '/GalleryPage',
+        element: <GalleryPage/>
+      },
+      {
+        path: '/SearchPhotoPage',
+        element: <SearchPhotoPage/>
+      }
     ]
   },
 

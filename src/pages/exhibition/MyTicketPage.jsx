@@ -1,12 +1,20 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
 import TicketItem from "../../components/TicketItem";
 
 const MyTicketPage = () => {
+  const navigate = useNavigate();
+  const handleClick = ()=>{
+    navigate('/QRScanPage');
+  }
+
+
   return (
     <MainContainer>
       <Header>나의 티켓</Header>
       <TicketPreview>
-        <PreviewBox>QR 확인</PreviewBox>
+        <PreviewBox onClick={handleClick} >QR 확인</PreviewBox>
         <TicketModel>티켓 모양</TicketModel>
       </TicketPreview>
       <TicketList>
