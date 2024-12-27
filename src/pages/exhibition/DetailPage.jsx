@@ -1,15 +1,24 @@
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
+
 
 const DetailPage = () => {
+    const location = useLocation();
+    const title = location.state?.title;
+    const text = location.state?.text;
+
   return (
     <MainContainer>
       <Header>
-        <HeadText>작품명</HeadText>
+        <HeadText>{title}</HeadText>
       </Header>
+
       <PhotoImage />
+
       <Description>
-        설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명
+        {text}
       </Description>
+      
       <EditButton>수정하기</EditButton>
     </MainContainer>
   );
@@ -22,9 +31,10 @@ const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 20px;
   box-sizing: border-box;
+
 `;
 
 const Header = styled.div`
@@ -61,20 +71,16 @@ const Description = styled.p`
   line-height: 1.6;
   text-align: justify;
   margin-bottom: 20px;
+  height:200px;
 `;
 
 const EditButton = styled.button`
   width: 90%;
   max-width: 400px;
   padding: 10px;
-  background-color: #007bff;
-  color: white;
+  background-color: #F3C3B7;
+  color: black;
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
 `;

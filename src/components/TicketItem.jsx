@@ -5,7 +5,7 @@ const TicketItem = ({ data }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/GalleryPage");
+    navigate("/GalleryPage", { state: { title: data.title } });
   };
 
   return (

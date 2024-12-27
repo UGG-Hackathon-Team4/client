@@ -1,22 +1,30 @@
 import styled from "styled-components";
 import PhotoItem from "../../components/PhotoItem";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 const GalleryPage = () => {
   const naivgate = useNavigate();
+  const location = useLocation();
+  const title = location.state?.title;
   const handleNavigate = ()=>{
     naivgate('/ReviewPage');
   }
 
+  const data = {
+    title:"작품명",
+    text:"작품설명작품설명작품설명작품설명작품설명작품설명"
+  }
+
+
   return (
     <MainContainer>
       <Header>
-        <HeadText>전시회명</HeadText>
+        <HeadText>{title}</HeadText>
         <AddPhotoButton onClick={handleNavigate}>+ 작품 추가</AddPhotoButton>
       </Header>
       <PhotoList>
-        {[1, 2, 3, 4].map((title, index) => (
-          <PhotoItem title = {title} key={index}/>
+        {[data,data,data,data].map((data, index) => (
+          <PhotoItem data = {data} key={index}/>
 
         ))}
       </PhotoList>
@@ -57,7 +65,7 @@ const HeadText = styled.h1`
 
 const AddPhotoButton = styled.button`
   background-color: #F3C3B7;
-  color: white;
+  color: black;
   font-size: 14px;
   width:100px;
   height:35px;
