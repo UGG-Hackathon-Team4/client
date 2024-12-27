@@ -12,8 +12,8 @@ const RootLayout = () => {
         </MainContent>
         <Footer>
           <a href="/">Home</a>
-          <a href="/profile">Profile</a>
-          <a href="/settings">Settings</a>
+          <a href="/">Profile</a>
+          <a href="/">Settings</a>
         </Footer>
       </>
     );
@@ -27,8 +27,6 @@ const MainContent = styled.div`
   flex-direction: column;
   height: 100vh;
   background-color: #f8f9fa;
-
-  /* Safe Area Insets for iPhone */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 `;
@@ -70,8 +68,8 @@ const Footer = styled.footer`
 
 const ContentWrapper = styled.div`
   flex: 1;
-  margin-top: 60px; /* Space for the fixed header */
-  margin-bottom: 60px; /* Space for the fixed footer */
+  margin-top: 60px; 
+  margin-bottom: 60px; 
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 `;
