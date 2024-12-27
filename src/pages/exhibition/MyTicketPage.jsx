@@ -4,24 +4,32 @@ import { useNavigate } from "react-router-dom";
 import TicketItem from "../../components/TicketItem";
 
 const MyTicketPage = () => {
-  const navigate = useNavigate();
-  const handleClick = ()=>{
-    navigate('/QRScanPage');
+  const data = {
+    title:"반 고흐 빛의 시어터",
+    text:"더 트리니티 갤러리",
+    date:"2024.12.28"
   }
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate("/QRScanPage");
+  };
 
   return (
     <MainContainer>
       <Header>나의 티켓</Header>
+
       <TicketPreview>
-        <PreviewBox onClick={handleClick} >QR 확인</PreviewBox>
-        <TicketModel>티켓 모양</TicketModel>
+        <PreviewBox onClick={handleClick}/>
       </TicketPreview>
+
       <TicketList>
-        {[1, 2, 3].map((ticket, index) => (
-          <TicketItem ticket = {ticket} key={index} />
+        {[data, data, data].map((data, index) => (
+          <TicketItem data={data} key={index} />
         ))}
       </TicketList>
+
+
       <Pagination>
         <PageNumber>1</PageNumber>
         <PageNumber>2</PageNumber>
@@ -40,7 +48,7 @@ const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  padding: 20px;
+  padding-top:20px;
   box-sizing: border-box;
 `;
 
@@ -51,33 +59,34 @@ const Header = styled.h1`
 `;
 
 const TicketPreview = styled.div`
-  width: 100%;
-  max-width: 400px;
+ 
+ width: 305px;
   margin-bottom: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const PreviewBox = styled.div`
-  width: 100%;
+  width: 332px;
   height: 150px;
-  background-color: #f9f9f9;
+  background: url("/public/grayTicket.png") no-repeat center/contain;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  cursor: pointer;
 `;
 
-const TicketModel = styled.div`
-  font-size: 16px;
-  color: #666;
-`;
 
 const TicketList = styled.div`
   width: 100%;
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  gap: 20px;
 `;
 
 const Pagination = styled.div`

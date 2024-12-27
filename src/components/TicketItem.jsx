@@ -1,58 +1,63 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const TicketItem = ({ticket}) => {
-    const navigate = useNavigate();
-    const handleClick = ()=>{
-        navigate('/GalleryPage');
-    }
+const TicketItem = ({ data }) => {
+  const navigate = useNavigate();
 
-    return (
-      <Container onClick={handleClick}>
-        <TicketInfo>
-          <InfoRow>
-            <Label>전시명{ticket}</Label>
-            <Value>작가명</Value>
-          </InfoRow>
-          <InfoRow>
-            <Label>QR 받은 날짜</Label>
-            <Value>전시 장소</Value>
-          </InfoRow>
-        </TicketInfo>
-      </Container>
-    );
+  const handleClick = () => {
+    navigate("/GalleryPage");
   };
-  
+
+  return (
+    <TicketContainer onClick={handleClick}>
+      <TicketBackground>
+        <TicketContent>
+          <TicketDate>{data.date}</TicketDate>
+          <TicketTitle>{data.title}</TicketTitle>
+          <TicketLocation>{data.text}</TicketLocation>
+        </TicketContent>
+      </TicketBackground>
+    </TicketContainer>
+  );
+};
 
 export default TicketItem;
 
-const Container = styled.div`
+const TicketContainer = styled.div`
+  width: 332px;
+  height: auto;
+  cursor: pointer;
+`;
+
+const TicketBackground = styled.div`
+  width: 100%;
+  height: 162px;
+  background: url("/public/ticket.png") no-repeat center/contain;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+`;
+
+const TicketContent = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f1f1f1;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-const TicketInfo = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
-const InfoRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`;
-
-const Label = styled.span`
-  font-size: 14px;
-  color: #333;
-  font-weight: bold;
-`;
-
-const Value = styled.span`
-  font-size: 14px;
+const TicketDate = styled.div`
+  font-size: 12px;
   color: #666;
+  margin-bottom: 5px;
+`;
+
+const TicketTitle = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+`;
+
+const TicketLocation = styled.div`
+  font-size: 14px;
+  color: #999;
 `;

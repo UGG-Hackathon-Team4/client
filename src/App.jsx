@@ -14,7 +14,7 @@ import DetailPage from './pages/exhibition/DetailPage';
 import QRDataPage from './pages/search/QRDataPage';
 import ReviewPage from "./pages/search/ReviewPage.jsx";
 import NoPhotoPage from './pages/search/NoPhotoPage';
-
+import CardSlider from './pages/search/CardSlider';
 // 라우터 설정
 const router = createBrowserRouter([
   {
@@ -60,7 +60,14 @@ const router = createBrowserRouter([
       {
         path: '/NoPhotoPage',
         element: <NoPhotoPage/>
+      },
+      {
+        path: '/CardSlider',
+        element: <CardSlider/>
       }
+
+
+      
     ]
   },
 ]);
