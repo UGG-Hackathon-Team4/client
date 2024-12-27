@@ -13,9 +13,11 @@ import SearchPhotoPage from './pages/search/SearchPhotoPage';
 import DetailPage from './pages/exhibition/DetailPage';
 import QRDataPage from './pages/search/QRDataPage';
 import ReviewPage from "./pages/search/ReviewPage.jsx";
-import NoPhotoPage from './pages/search/NoPhotoPage';
+import NoCardSliderPage from './pages/search/NoCardSliderPage';
 import CardSlider from './pages/search/CardSlider';
 import AlreadyReviewPage from './pages/search/AlreadyReviewPage.jsx'
+
+
 // 라우터 설정
 const router = createBrowserRouter([
   {
@@ -59,8 +61,8 @@ const router = createBrowserRouter([
         element: <ReviewPage/>
       },
       {
-        path: '/NoPhotoPage',
-        element: <NoPhotoPage/>
+        path: '/NoCardSliderPage',
+        element: <NoCardSliderPage/>
       },
       {
         path: '/CardSlider',

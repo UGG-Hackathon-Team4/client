@@ -58,7 +58,7 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #fdf6e4;
+
 `;
 
 const Header = styled.h1`

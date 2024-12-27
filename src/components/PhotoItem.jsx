@@ -1,58 +1,61 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const PhotoItem = ({ data }) => {
   const navigate = useNavigate();
+
   const handleClick = () => {
-    navigate('/DetailPage',{ state: { title: data.title,text:data.text } });
+    navigate('/DetailPage', { state: { item: data } }); // 클릭한 아이템 데이터를 전달
   };
 
   return (
-    <MainContainer onClick={handleClick}>
-      <Thumbnail />
-      <PhotoDetails>
-        <PhotoTitle>{data.title}</PhotoTitle>
-        <PhotoDescription>
-          {data.text}
-        </PhotoDescription>
-      </PhotoDetails>
-    </MainContainer>
+    <ItemContainer onClick={handleClick}>
+      <Image src={data.imageUrl} alt={data.title} />
+      <TextContainer>
+        <Title>{data.title}</Title>
+        <Text>{data.text}</Text>
+      </TextContainer>
+    </ItemContainer>
   );
 };
 
 export default PhotoItem;
 
-const MainContainer = styled.div`
-  display: grid;
-  grid-template-columns: 100px auto; 
-  gap: 15px; 
-  align-items: center; 
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+const ItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 20px;
+  cursor: pointer; /* 클릭 가능한 스타일 */
+  &:hover {
+    background-color: #f0f0f0;
+  }
 `;
 
-const Thumbnail = styled.div`
+const Image = styled.img`
   width: 100px;
-  height: 100px;
-  background-color: #ccc;
-  border-radius: 8px;
+  height: auto;
+  border-radius: 5px;
 `;
 
-const PhotoDetails = styled.div`
+const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 `;
 
-const PhotoTitle = styled.h3`
-  font-size: 16px;
+const Title = styled.h3`
+  font-size: 18px;
   color: #333;
-  margin-bottom: 10px;
+  margin: 0;
 `;
 
-const PhotoDescription = styled.p`
+const Text = styled.p`
   font-size: 14px;
   color: #666;
+  margin-top: 5px;
+  line-height: 1.5;
 `;

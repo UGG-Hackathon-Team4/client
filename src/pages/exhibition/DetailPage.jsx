@@ -1,86 +1,88 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
-
 const DetailPage = () => {
-    const location = useLocation();
-    const title = location.state?.title;
-    const text = location.state?.text;
+  const location = useLocation();
+  const item = location.state?.item;
+
+  if (!item) {
+    return <ErrorMessage>잘못된 접근입니다.</ErrorMessage>;
+  }
+
+  const handleButtonClick = () => {
+  };
 
   return (
-    <MainContainer>
-      <Header>
-        <HeadText>{title}</HeadText>
-      </Header>
+    <DetailContainer>
+      <Title>{item.title}</Title>
+      <Image src={item.imageUrl} alt={item.title} />
+      <TextContainer>
+        <Text>{item.text}</Text>
+      </TextContainer>
+      <StyledButton onClick={handleButtonClick}>
+        수정하기
+      </StyledButton>
 
-      <PhotoImage />
-
-      <Description>
-        {text}
-      </Description>
-      
-      <EditButton>수정하기</EditButton>
-    </MainContainer>
+    </DetailContainer>
   );
 };
 
 export default DetailPage;
 
-const MainContainer = styled.div`
+const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100%;
   padding: 20px;
-  box-sizing: border-box;
-
 `;
 
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-
-  width: 100%;
-  padding: 10px 20px;
-
-`;
-
-
-const HeadText = styled.h1`
-  font-size: 20px;
-  color: #333;
-  text-align: center;
-  margin: 0;
-`;
-
-const PhotoImage = styled.div`
-  width: 90%;
-  height: 300px;
-  margin: 20px 0;
-  background-color: #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Description = styled.p`
-  width: 90%;
-  font-size: 14px;
-  color: #666;
-  line-height: 1.6;
-  text-align: justify;
+const Image = styled.img`
+  width: 300px;
+  height: auto;
   margin-bottom: 20px;
-  height:200px;
 `;
 
-const EditButton = styled.button`
-  width: 90%;
-  max-width: 400px;
-  padding: 10px;
-  background-color: #F3C3B7;
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  color: #333;
+`;
+
+const Text = styled.p`
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.5;
+`;
+
+const ErrorMessage = styled.div`
+  font-size: 18px;
+  color: red;
+  text-align: center;
+`;
+
+const StyledButton = styled.button`
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color: #f3c3b7;
+  border: none;
   color: black;
   font-size: 16px;
-  border: none;
-  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 30px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #e8b99c;
+  }
 `;
+
+

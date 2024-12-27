@@ -1,11 +1,41 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ReviewPage = () => {
-  const [selectedOption, setSelectedOption] = useState("feedback"); // 초기 상태: 'feedback'
-
+  const [selectedOption, setSelectedOption] = useState("feedback");
+  const [description, setDescription] = useState(""); // 초기값 빈 문자열
+  const [artworkName, setArtworkName] = useState(""); // 작품 이름 상태 추가
+  const navigate = useNavigate();
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+  };
+
+  const fetchData = () => {
+    const postComment = async () => {
+      try {
+        const response = await axios.post("http://localhost:3000/api/v1/comment/add", {
+          userId: 1,
+          artworkId: 1,
+          description: description,
+        });
+        console.log(response.data);
+        navigate('/CardSlider')
+      } catch (e) {
+        console.error("Error posting comment:", e);
+      }
+    };
+
+    postComment();
+  };
+
+  const handleInput = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleArtworkInput = (e) => {
+    setArtworkName(e.target.value);
   };
 
   return (
@@ -13,7 +43,11 @@ const ReviewPage = () => {
       <Header>나의 감상평</Header>
       <Container>
         <Question>작품의 이름은 무엇인가요?</Question>
-        <Input placeholder="작품 이름을 입력해주세요" />
+        <Input
+          value={artworkName}
+          onChange={handleArtworkInput}
+          placeholder="작품 이름을 입력해주세요"
+        />
         <Question>
           <OptionWrapper>
             <OptionText
@@ -31,19 +65,24 @@ const ReviewPage = () => {
           </OptionWrapper>
         </Question>
         <Textarea
+          value={description}
+          onChange={handleInput}
           placeholder={
             selectedOption === "feedback"
-              ? "텍스트를 입력해주세요"
-              : "텍스트를 입력해주세요"
+              ? "의견을 입력해주세요"
+              : "감상을 입력해주세요"
           }
         />
       </Container>
-      <Button>작성 완료</Button>
+      <Button onClick={fetchData}>작성 완료</Button>
     </MainContainer>
   );
 };
 
 export default ReviewPage;
+
+// Styled Components 정의는 그대로 유지
+
 
 const MainContainer = styled.div`
   display: flex;
@@ -53,7 +92,7 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #fdf6e4;
+
 `;
 
 const Header = styled.h1`

@@ -22,7 +22,8 @@ const Card = styled.div`
   margin-bottom: 20px;
   text-align: center;
   transition: transform 0.3s ease;
-  background-color: #f3c3b7;
+  background: linear-gradient(180deg, rgba(243, 195, 183, 0.4) 0%, rgba(243, 195, 183, 1) 32%);
+  position: relative;
 `;
 
 const CardImage = styled.img`
@@ -44,6 +45,20 @@ const CardTitle = styled.h2`
 const CardDescription = styled.p`
   font-size: 14px;
   color: #666;
+`;
+
+const HeartButton = styled.img`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const SwipeIcons = styled.div`
@@ -105,6 +120,7 @@ const Title = styled.h1`
 function CardSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState(null);
+  const [isLiked, setIsLiked] = useState(false); // 좋아요 상태 관리
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   const cards = [
@@ -131,6 +147,10 @@ function CardSlider() {
         '최후의 만찬에서 빼놓을 수 없는 것은 유다가 그림 속에 다른 제자들과 동등하게 앉아있다는 사실이다.',
     },
   ];
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
 
   const nextCard = () => {
     setSwipeDirection('right');
@@ -160,12 +180,18 @@ function CardSlider() {
       </Header>
 
       <Card>
+        <HeartButton
+          src={isLiked ? "/redHeart.png" : "/heart.png"}
+          alt="좋아요 버튼"
+          onClick={toggleLike}
+        />
         <CardImage src={cards[currentIndex].image} alt={cards[currentIndex].title} />
         <CardContent>
           <CardTitle>{cards[currentIndex].title}</CardTitle>
           <CardDescription>{cards[currentIndex].description}</CardDescription>
         </CardContent>
       </Card>
+
       <Button onClick={handleButtonClick}>감상평 적기</Button>
       {swipeDirection && (
         <SwipeIcons visible isLeft={swipeDirection === 'left'}>

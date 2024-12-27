@@ -14,7 +14,9 @@ const RootLayout = () => {
       {!shouldHideHeader && (
         <Header>
           {location.pathname === "/QRDataPage" ? (
-            <HomeButton onClick={() => navigate("/")}>홈으로</HomeButton> // QRDataPage 전용 버튼
+            <HomeButton onClick={() => navigate("/")}> 
+              <HomeIcon src="/home.png" alt="홈으로" />
+            </HomeButton> // QRDataPage 전용 버튼
           ) : (
             <BackButton onClick={() => navigate(-1)}>&lt;</BackButton> // 기본 뒤로가기 버튼
           )}
@@ -62,14 +64,14 @@ const BackButton = styled.button`
 const HomeButton = styled.button`
   background: none;
   border: none;
-  color: black;
-  font-size: 18px;
   cursor: pointer;
-  text-decoration: underline;
+  display: flex;
+  align-items: center;
+`;
 
-  &:hover {
-    text-decoration: none;
-  }
+const HomeIcon = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 const ContentWrapper = styled.div`

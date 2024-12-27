@@ -17,7 +17,7 @@ const NoCardSliderPage = () => {
   return (
     <MainContainer>
       <Header>업로드된 감상이 없습니다.</Header>
-      <Button onClick={handleSubmit}>작성 완료</Button>
+      <Button onClick={handleSubmit}>감상평 적기</Button>
     </MainContainer>
   );
 };

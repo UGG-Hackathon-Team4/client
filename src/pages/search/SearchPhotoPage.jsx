@@ -46,7 +46,7 @@ function FileUpload() {
     return (
         <div style={{ textAlign: 'center' }}>
             {/* 텍스트 추가 */}
-            <div style={{ display:'flex',justifyContent:'center',flexDirection:'column', marginTop:'100px' }}>
+            <div style={{ display:'flex',justifyContent:'center',flexDirection:'column', marginTop:'80px' }}>
                 <p style={{ fontWeight: 'bold', fontSize: '24px', color: 'black' }}>작품 사진을 업로드 해보세요!</p>
                 <p style={{ fontWeight: 'normal', fontSize: '13px', color: 'gray' }}>함께 관람한 사람들의 감상팁을 확인할 수 있어요.</p>
             </div>
@@ -85,7 +85,7 @@ function FileUpload() {
                         height: 'auto',
                         cursor: 'pointer',
                         backgroundColor: '#D9D9D9',
-                        padding: '30px',
+                        padding: '60px',
                         borderRadius: '10px',
                         marginTop: '15px'
                     }}

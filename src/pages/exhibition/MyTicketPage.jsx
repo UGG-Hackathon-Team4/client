@@ -1,14 +1,27 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import TicketItem from "../../components/TicketItem";
 
 const MyTicketPage = () => {
-  const data = {
-    title:"반 고흐 빛의 시어터",
-    text:"더 트리니티 갤러리",
-    date:"2024.12.28"
-  }
+  // 여러 티켓 데이터를 배열로 정의
+  const ticketData = [
+    {
+      title: "다빈치 얼라이브", 
+      text: "용산 전쟁기념관 기획전시실",
+      date: "2024.12.28"
+    },
+    {
+      title: "반 고흐 빛의 시어터", 
+      text: "더 트리니티 갤러리",
+      date: "2024.12.28"
+    },
+    {
+      title: "2024 겨울 그림 축제", 
+      text: "더 퀸",
+      date: "2024.12.28"
+    }
+  ];
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -18,30 +31,28 @@ const MyTicketPage = () => {
   return (
     <MainContainer>
       <Header>
-      <HeaderText>나의 티켓</HeaderText>  
+        <HeaderText>나의 티켓</HeaderText>  
       </Header>
 
       <TicketPreview>
-        <PreviewBox onClick={handleClick}/>
+        <PreviewBox onClick={handleClick} />
       </TicketPreview>
 
       <TicketList>
-        {[data, data, data].map((data, index) => (
-          <TicketItem data={data} key={index} />
+        {/* 데이터를 map으로 반복하여 각 TicketItem에 다른 데이터 전달 */}
+        {ticketData.map((ticket, index) => (
+          <TicketItem data={ticket} key={index} />
         ))}
       </TicketList>
 
-
       <Pagination>
-      <PageNumber>&lt;</PageNumber>
+        <PageNumber>&lt;</PageNumber>
         <PageNumber>1</PageNumber>
         <PageNumber>2</PageNumber>
         <PageNumber>3</PageNumber>
         <PageNumber>4</PageNumber>
         <PageNumber>5</PageNumber>
         <PageNumber>&gt;</PageNumber>
-        
-
       </Pagination>
     </MainContainer>
   );
@@ -54,25 +65,23 @@ const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  padding-top:20px;
+  padding-top: 20px;
   box-sizing: border-box;
 `;
 
 const Header = styled.div`
   margin-bottom: 20px;
-  margin-left:50px;
-  width:100%;
+  margin-left: 50px;
+  width: 100%;
 `;
 
 const HeaderText = styled.h1`
-font-size: 24px;
+  font-size: 24px;
   color: #333;
-`
-
+`;
 
 const TicketPreview = styled.div`
- 
- width: 305px;
+  width: 305px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -91,13 +100,12 @@ const PreviewBox = styled.div`
   cursor: pointer;
 `;
 
-
 const TicketList = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content:center;
-  align-items:center;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
 `;
 
