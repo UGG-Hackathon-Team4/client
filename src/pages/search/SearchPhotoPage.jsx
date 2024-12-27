@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 훅을 사용
 
 function FileUpload() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
     const fileInputRef = useRef(null);
+    const navigate = useNavigate(); // useNavigate 훅을 사용하여 페이지 이동
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -17,36 +19,15 @@ function FileUpload() {
         fileInputRef.current.click();
     };
 
-    const handleUpload = async () => {
-        if (selectedFile) {
-            const formData = new FormData();
-            formData.append('file', selectedFile);
-
-            try {
-                setUploadStatus('업로드 중...');
-                const response = await fetch('https://example.com/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (!response.ok) {
-                    throw new Error('업로드 실패');
-                }
-
-                const result = await response.json();
-                setUploadStatus('업로드 성공!');
-                console.log('업로드 성공:', result);
-            } catch (error) {
-                setUploadStatus('업로드 실패.');
-                console.error('업로드 오류:', error);
-            }
-        }
+    const handleUpload = () => {
+        // 파일이 선택되었든 아니든 무조건 CardSlider로 이동
+        navigate('/CardSlider'); // '/CardSlider' 경로로 이동
     };
 
     return (
         <div style={{ textAlign: 'center' }}>
             {/* 텍스트 추가 */}
-            <div style={{ display:'flex', justifyContent:'center', flexDirection:'column', marginTop:'80px' }}>
+            <div style={{ display:'flex',justifyContent:'center',flexDirection:'column', marginTop:'80px' }}>
                 <p style={{ fontWeight: 'bold', fontSize: '24px', color: 'black' }}>작품 사진을 업로드 해보세요!</p>
                 <p style={{ fontWeight: 'normal', fontSize: '13px', color: 'gray' }}>함께 관람한 사람들의 감상팁을 확인할 수 있어요.</p>
             </div>
@@ -59,7 +40,7 @@ function FileUpload() {
                     marginRight: 'auto',
                     display: 'block',
                     backgroundColor: '#F3C3B7',
-                    border: 'none', // 테두리 없애기
+                    border: 'none', // 테두리 제거
                     color: 'black',
                     fontSize: '16px',
                     cursor: 'pointer',
@@ -83,11 +64,11 @@ function FileUpload() {
                         width: '250px',
                         height: 'auto',
                         cursor: 'pointer',
-                        backgroundColor: 'white',
+                        backgroundColor: '#ffffff',
                         padding: '60px',
                         borderRadius: '10px',
                         marginTop: '15px',
-                        border:'2px solid #ddd'
+                        border: '2px solid #ddd'
                     }}
                 />
             </div>
@@ -102,8 +83,8 @@ function FileUpload() {
                             cursor: 'pointer',
                             backgroundColor: '#F3C3B7',
                             color: 'black',
-                            borderRadius: '10px',
-                            border: 'none', // 테두리 없애기
+                            border: 'none', // 테두리 제거
+                            borderRadius: '10px'
                         }}
                     >
                         업로드
@@ -120,12 +101,7 @@ function FileUpload() {
                 onChange={handleFileChange}
             />
 
-            {/* 업로드 상태 표시 */}
-            {uploadStatus && (
-                <p style={{ marginTop: '20px', fontWeight: 'bold', color: uploadStatus.includes('failed') ? 'red' : 'green' }}>
-                    {uploadStatus}
-                </p>
-            )}
+            {/* 업로드 상태 표시 (현재는 업로드 상태 표시가 필요 없으므로 생략) */}
         </div>
     );
 }
