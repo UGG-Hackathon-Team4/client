@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom"
 
 const MainPage = ()=>{
     const navigate = useNavigate();
+
+    //작품찾기 페이지 이동 함수
     const navigateSearch = ()=>{
-        navigate('/login');
+        navigate('/');
     }
+    //전시회 보기 페이지 이동 함수
     const navigateExhibition = ()=>{
         navigate('/');
     }
