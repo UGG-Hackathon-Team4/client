@@ -45,22 +45,34 @@ function FileUpload() {
 
     return (
         <div style={{ textAlign: 'center' }}>
+            {/* 텍스트 추가 */}
+            <div style={{ display:'flex',justifyContent:'center',flexDirection:'column', marginTop:'100px' }}>
+                <p style={{ fontWeight: 'bold', fontSize: '24px', color: 'black' }}>작품 사진을 업로드 해보세요!</p>
+                <p style={{ fontWeight: 'normal', fontSize: '13px', color: 'gray' }}>함께 관람한 사람들의 감상팁을 확인할 수 있어요.</p>
+            </div>
             {/* 텍스트 버튼 */}
             <button
                 onClick={handleButtonClick}
                 style={{
-                    backgroundColor: '#E2E2E2',
+                    marginTop: '100px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    display: 'block',
+                    backgroundColor: '#F3C3B7',
                     border: 'none',
                     color: 'black',
                     fontSize: '16px',
                     cursor: 'pointer',
-                    position: 'absolute',
-                    top: '100px', 
-                    left: '45%'
+                    paddingTop: '10px',
+                    paddingBottom: '10px',
+                    paddingLeft: '30px',
+                    paddingRight: '30px',
+                    borderRadius: '10px'
                 }}
             >
                 사진찍기
             </button>
+
 
             {/* 이미지 선택 버튼 */}
             <div style={{ position: 'relative', display: 'inline-block', marginBottom: '20px' }}>
@@ -69,13 +81,13 @@ function FileUpload() {
                     alt="사진 선택"
                     onClick={handleButtonClick}
                     style={{
-                        width: '200px',
+                        width: '250px',
                         height: 'auto',
                         cursor: 'pointer',
-                        backgroundColor: '#E2E2E2',
+                        backgroundColor: '#D9D9D9',
                         padding: '30px',
-                        borderRadius: '5px',
-                        marginTop: '150px',
+                        borderRadius: '10px',
+                        marginTop: '15px'
                     }}
                 />
             </div>
@@ -88,8 +100,9 @@ function FileUpload() {
                         style={{
                             padding: '10px 20px',
                             cursor: 'pointer',
-                            backgroundColor: '#4CAF50',
-                            color: 'white',
+                            backgroundColor: '#F3C3B7',
+                            color: 'black',
+                            borderRadius: '10px'
                         }}
                     >
                         업로드
@@ -110,13 +123,6 @@ function FileUpload() {
             {uploadStatus && (
                 <p style={{ marginTop: '20px', fontWeight: 'bold', color: uploadStatus.includes('failed') ? 'red' : 'green' }}>
                     {uploadStatus}
-                </p>
-            )}
-
-            {/* 업로드 버튼 아래 텍스트 추가 */}
-            {selectedFile && (
-                <p style={{ marginTop: '10px', fontSize: '14px', color: '#555' }}>
-                    파일을 업로드하려면 위 버튼을 클릭하세요.
                 </p>
             )}
         </div>
