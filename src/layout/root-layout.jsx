@@ -4,22 +4,22 @@ import styled from "styled-components";
 const RootLayout = () => {
     return (
       <>
-        <Header>App Header</Header>
-        <MainContent>
-          <ContentWrapper>
-            <Outlet />
-          </ContentWrapper>
-        </MainContent>
-        <Footer>
-          <a href="/">Home</a>
-          <a href="/">Profile</a>
-          <a href="/">Settings</a>
-        </Footer>
+<Outlet />
       </>
     );
   };
 
-
+/*   <Header>App Header</Header>
+  <MainContent>
+    <ContentWrapper>
+      <Outlet />
+    </ContentWrapper>
+  </MainContent>
+  <Footer>
+    <a href="/">Home</a>
+    <a href="/">Profile</a>
+    <a href="/">Settings</a>
+  </Footer> */
 
 
 const MainContent = styled.div`

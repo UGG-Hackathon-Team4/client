@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainPage from './pages/MainPage';
-import RootLayout from "./layout/root-layout";
 import './App.css';
 
+import RootLayout from "./layout/root-layout";
 
+import MyTicketPage from './pages/exhibition/MyTicketPage';
+import MainPage from './pages/MainPage';
+import QRScanPage from './pages/search/QRScanPage';
 //라우터
 const router = createBrowserRouter([
   {
@@ -14,12 +16,14 @@ const router = createBrowserRouter([
         index: true,
         element: <MainPage />
       },
-/*       
       {
-        path: '/login',
-        element: <LoginPage/>
+        path: '/MyTicketPage',
+        element: <MyTicketPage/>
       },
- */
+      {
+        path: '/QRScanPage',
+        element: <QRScanPage/>
+      },
     ]
   },
 
