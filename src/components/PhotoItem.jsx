@@ -1,14 +1,19 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
 
 const PhotoItem = ({title})=>{
+    const navigate = useNavigate();
+    const handleClick = ()=>{
+      navigate('/DetailPage')
+    }
     return(
-        <MainConatainer >
+        <MainConatainer onClick={handleClick}>
             <Thumbnail />
             <PhotoDetails>
               <PhotoTitle>{title}</PhotoTitle>
               <PhotoDescription>
-                This is a brief description of the artwork. This is a short
-                summary of the content or theme.
+               설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명
               </PhotoDescription>
             </PhotoDetails>
           </MainConatainer>

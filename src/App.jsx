@@ -7,10 +7,14 @@ import MyTicketPage from './pages/exhibition/MyTicketPage';
 import MainPage from './pages/MainPage';
 import QRScanPage from './pages/search/QRScanPage';
 import QRGenerator from './pages/search/QRGenerator.jsx';
+
 import GalleryPage from "./pages/exhibition/GalleryPage.jsx";
 import SearchPhotoPage from './pages/search/SearchPhotoPage';
+import DetailPage from './pages/exhibition/DetailPage';
+import QRDataPage from './pages/search/QRDataPage';
 
-//라우터
+
+// 라우터 설정
 const router = createBrowserRouter([
   {
     path: '/',
@@ -39,19 +43,23 @@ const router = createBrowserRouter([
       {
         path: '/SearchPhotoPage',
         element: <SearchPhotoPage/>
+      },
+      {
+        path: '/DetailPage',
+        element: <DetailPage/>
+      },
+      {
+        path: '/QRDataPage',
+        element: <QRDataPage/>
       }
     ]
   },
-
-])
-
+]);
 
 function App() {
   return (
-    <>
-     <RouterProvider router={router} />
-    </>
-  )
+      <RouterProvider router={router} />
+  );
 }
 
-export default App
+export default App;
