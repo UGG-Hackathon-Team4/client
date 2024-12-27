@@ -1,19 +1,24 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate 훅을 임포트
 
 const ReviewPage = () => {
   const [selectedOption, setSelectedOption] = useState("feedback"); // 초기 상태: 'feedback'
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+  };
+
+  const handleSubmit = () => {
+    // 작성 완료 후 '/CardView'로 이동
+    navigate("/CardSlider");
   };
 
   return (
     <MainContainer>
       <Header>나의 감상평</Header>
       <Container>
-        <Question>작품의 이름은 무엇인가요?</Question>
-        <Input placeholder="작품 이름을 입력해주세요" />
         <Question>
           <OptionWrapper>
             <OptionText
@@ -38,7 +43,7 @@ const ReviewPage = () => {
           }
         />
       </Container>
-      <Button>작성 완료</Button>
+      <Button onClick={handleSubmit}>작성 완료</Button>
     </MainContainer>
   );
 };
@@ -80,9 +85,9 @@ const Question = styled.label`
 
 const Input = styled.input`
   width: 100%;
-  padding: 5px 0; /* 위 아래 여백을 조금 줄여서 밑줄만 강조 */
-  border: none; /* 테두리 제거 */
-  border-bottom: 2px solid black; /* 밑줄 추가 */
+  padding: 5px 0;
+  border: none;
+  border-bottom: 2px solid black;
   font-size: 14px;
   margin-bottom: 30px;
   box-sizing: border-box;
@@ -90,7 +95,7 @@ const Input = styled.input`
 `;
 
 const Textarea = styled.textarea`
-margin-top: 15px;
+  margin-top: 15px;
   width: 100%;
   height: 250px;
   padding: 10px;
@@ -123,7 +128,7 @@ const Button = styled.button`
 const OptionWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px; /* 텍스트 간 간격 설정 */
+  gap: 8px;
 `;
 
 const OptionText = styled.span`
@@ -131,11 +136,11 @@ const OptionText = styled.span`
   font-weight: ${({ isSelected }) => (isSelected ? "bold" : "normal")};
   color: ${({ isSelected }) => (isSelected ? "#333" : "#aaa")};
   cursor: pointer;
-  padding: 5px 10px; /* 네모 박스처럼 보이도록 패딩 추가 */
-  background-color: ${({ isSelected }) => (isSelected ? "#FFDDD4" : "#f2f2f2")}; /* 선택된 항목에 배경 추가 */
-  border-radius: 5px; /* 네모를 둥글게 */
-  
+  padding: 5px 10px;
+  background-color: ${({ isSelected }) => (isSelected ? "#FFDDD4" : "#f2f2f2")};
+  border-radius: 5px;
+
   &:hover {
-    background-color: ${({ isSelected }) => (isSelected ? "#FFDDD4" : "#f0f0f0")}; /* 선택된 경우와 미선택된 경우 배경 색상 변경 */
+    background-color: ${({ isSelected }) => (isSelected ? "#FFDDD4" : "#f0f0f0")};
   }
 `;

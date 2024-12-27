@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { useSwipeable } from 'react-swipeable'; // react-swipeable 라이브러리 사용
-import styled, { css } from 'styled-components'; // styled-components 사용
+import { useSwipeable } from 'react-swipeable';
+import styled, { css } from 'styled-components';
+import { useNavigate } from 'react-router-dom'; // useNavigate 임포트
 
+// 스타일 정의
 const CardSliderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 50px;
-  position: relative; /* swipe 아이콘을 카드와 겹치게 배치하려면 relative 위치 필요 */
+  position: relative;
 `;
 
 const Card = styled.div`
@@ -90,25 +92,35 @@ const Button = styled.button`
   }
 `;
 
+const Header = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+`;
+
 function CardSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState(null);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const cards = [
     {
       id: 1,
       title: '모나리자러버S2',
-      image:
-        'https://i.namu.wiki/i/UcYMOZDHIlu0Isx5ALJ1ZCSNLwaNOHvIm36Qq4tIF2LbkcPqlswVyukN53_fW6-XzS3XNBE6I_FcjWgmYTgwlNMzUI-qlcuQbz6IQny9Uzg-YFgWB-5v58xv6JxTZiAbVimNZO9eHB6MZjKBlmzU1A.jpg',
+      image: 'https://img.wkorea.com/w/2024/05/style_6641b1396e954-913x1400.jpg',
       description:
-        '다빈치의 모나리자는 프랑스 루브르 박물관에서 가장 인기 있는 회화작품이다. 수많은 관람객의 감상평은 제각각이다. 예컨대 영국의 극작가 노엘 코워드 경은 ‘그녀는 좀 아픈 사람처럼 보인다’고 말했다.',
+        '다빈치의 모나리자는 프랑스 루브르 박물관에서 가장 인기 있는 회화작품이다. 수많은 관람객의 감상평은 제각각이다.',
     },
     {
       id: 2,
       title: '루브루초보',
       image: 'https://cdn.sisajournal.com/news/photo/202403/284239_206126_5852.jpg',
       description:
-        '빈센트 반 고흐는 40여 점에 이르는 자화상을 남겼다. 갈색조가 주를 이루는 초기 사실주의적 자화상에서부터 인상주의적 색채와 기법을 거쳐 자신만의 개성이 돋보이는 후기작에 이르기까지 그의 자화상 양식은 많은 변화 과정을 거치게 된다.',
+        '빈센트 반 고흐는 40여 점에 이르는 자화상을 남겼다. 그의 자화상 양식은 많은 변화 과정을 거친다.',
     },
     {
       id: 3,
@@ -131,7 +143,7 @@ function CardSlider() {
   };
 
   const handleButtonClick = () => {
-    alert('사진을 찍습니다!');
+    navigate('/AlreadyReviewPage'); // 페이지 이동
   };
 
   const swipeHandlers = useSwipeable({
@@ -143,6 +155,10 @@ function CardSlider() {
 
   return (
     <CardSliderContainer {...swipeHandlers}>
+      <Header>
+        <Title>[해바라기]의 감상평</Title>
+      </Header>
+
       <Card>
         <CardImage src={cards[currentIndex].image} alt={cards[currentIndex].title} />
         <CardContent>

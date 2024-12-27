@@ -12,28 +12,33 @@ const QRDataPage = () => {
     navigate("/SearchPhotoPage");
   };
 
+
+  // 버튼 클릭 시 실행될 함수
+  const handleButtonClick = () => {
+    navigate("/SearchPhotoPage");
+  };
+
   return (
     <MainContainer>
       <Header>
         <Title>{qrData.event || "전시명"}</Title>
         <Subtitle>전시에 오신 것을 환영합니다!</Subtitle>
       </Header>
-      <ExhibitionInfo>
-        <InfoRow>
-          <Label>전시명</Label>
-          <Value>{qrData.event}</Value>
-        </InfoRow>
-        <InfoRow>
-          <Label>QR 찍은 날짜</Label>
-          <Value>{qrData.date}</Value>
-        </InfoRow>
-        <InfoRow>
-          <Label>전시 장소</Label>
-          <Value>{qrData.location}</Value>
-        </InfoRow>
-      </ExhibitionInfo>
-      <Notice>작품을 찍으면 감상 팁을 확인할 수 있어요!</Notice>
-      <ActionButton onClick={handleNavigate}>작품 함께보기</ActionButton>
+
+      <TicketContainer >
+        <TicketBackground>
+          <TicketContent>
+            <TicketDate>{qrData.date}</TicketDate>
+            <TicketTitle>{qrData.event}</TicketTitle>
+            <TicketLocation>{qrData.location}</TicketLocation>
+          </TicketContent>
+        </TicketBackground>
+      </TicketContainer>
+
+      {/* 사진찍기 버튼 추가 */}
+      <ActionButton onClick={handleButtonClick}>
+        작품 함께보기
+      </ActionButton>
     </MainContainer>
   );
 };
@@ -66,52 +71,62 @@ const Subtitle = styled.h2`
   color: #666;
 `;
 
-const ExhibitionInfo = styled.div`
+const TicketContainer = styled.div`
+  width: 305px;
+  height: auto;
+`;
+
+const TicketBackground = styled.div`
   width: 100%;
-  max-width: 400px;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-`;
-
-const InfoRow = styled.div`
+  height: 162px;
+  background: url("/public/ticket.png") no-repeat center/contain;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
 `;
 
-const Label = styled.span`
-  font-size: 14px;
-  color: #333;
-  font-weight: bold;
+const TicketContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 `;
 
-const Value = styled.span`
-  font-size: 14px;
+const TicketDate = styled.div`
+  font-size: 12px;
   color: #666;
+  margin-bottom: 5px;
 `;
 
-const Notice = styled.div`
+const TicketTitle = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+`;
+
+const TicketLocation = styled.div`
   font-size: 14px;
   color: #999;
-  margin-bottom: 20px;
-  text-align: center;
 `;
 
+// 사진찍기 버튼 스타일
 const ActionButton = styled.button`
-  width: 90%;
-  max-width: 400px;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
+  margin-top: 350px;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color: #f3c3b7;
   border: none;
-  border-radius: 5px;
+  color: black;
+  font-size: 16px;
   cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #f1b28b;
   }
 `;

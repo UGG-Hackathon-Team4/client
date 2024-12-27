@@ -114,8 +114,8 @@ const Header = styled.div`
 const ScanContainer = styled.div`
   width: 100%;
   max-width: 400px;
-  height: 300px;
-  border: 1px solid #ccc;
+  height: 600px;
+  border: 2px solid black;
   background-color: #d9d9d9;
   display: flex;
   align-items: center;
