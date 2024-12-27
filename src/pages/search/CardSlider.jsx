@@ -134,17 +134,17 @@ function CardSlider() {
     {
       id: 2,
       title: '루브루초보',
-      image: 'https://cdn.sisajournal.com/news/photo/202403/284239_206126_5852.jpg',
+      image: 'https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2022%2F05%2Fmona-lisa-smeared-with-cake-by-climate-change-activist-01.jpg?q=90&w=1400&cbr=1&fit=max',
       description:
-        '빈센트 반 고흐는 40여 점에 이르는 자화상을 남겼다. 그의 자화상 양식은 많은 변화 과정을 거친다.',
+        '모나리자가 이빨을 드러내지 않고 미소를 짓고 있는 이유를 그 당시 시대상과 연관 지어 이야기하기도 한다. 당시에는 위생 관념의 부재와 적절한 치과 치료가 이루어지지 않아서, 다들 치아 상태가 좋지 않았다. 따라서 귀족들은 웃을 때 이빨을 드러내지 않은 채 입을 다물고 미소를 짓는 것이 예의라고 생각했다. 모나리자의 알 수 없는 미소도 다 빈치의 치밀한 계산이라기보다는 단순히 그 때 그 모델이 그 표정을 짓고 있었기 때문일지도 모른다.'
     },
     {
       id: 3,
       title: '방구석미술관',
       image:
-        'https://mblogthumb-phinf.pstatic.net/MjAyMTA1MjFfMjg4/MDAxNjIxNTYzNjc1MDIz.uw6k_XWFzOc70YiIF0qlpVyRBUGOnRocesXkJcSSGLIg.fZzD1Jo2JnDepZVnyV10t1GAjJPmqBZ9YCzmIpHYJIYg.JPEG.mcst_pr/%EA%B3%B5%EA%B0%90-%EC%A0%95%EC%B1%85%EC%A3%BC%EA%B0%84%EC%A7%80%EA%B3%B5%EA%B0%90-%EB%8B%A4%EB%B9%88%EC%B9%98-%EB%AA%85%ED%99%94-%EB%A0%88%EC%98%A4%EB%82%98%EB%A5%B4%EB%8F%84%EB%8B%A4%EB%B9%88%EC%B9%98-%EB%AF%B8%EC%88%A0-%EC%B5%9C%ED%9B%84%EC%9D%98%EB%A7%8C%EC%B0%AC.jpg?type=w800',
+        'https://s3.ap-northeast-2.amazonaws.com/img.kormedi.com/news/article/__icsFiles/artimage/2018/04/13/c_km601/5957354_540.jpg',
       description:
-        '최후의 만찬에서 빼놓을 수 없는 것은 유다가 그림 속에 다른 제자들과 동등하게 앉아있다는 사실이다.',
+        '모나리자의 미소에서는 83%의 행복, 9%의 혐오감, 6%의 두려움이 담겨 있다.',
     },
   ];
 
@@ -176,7 +176,7 @@ function CardSlider() {
   return (
     <CardSliderContainer {...swipeHandlers}>
       <Header>
-        <Title>[해바라기]의 감상평</Title>
+        <Title>[모나리자]의 감상평</Title>
       </Header>
 
       <Card>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState, useRef } from "react";
 import QrScanner from "qr-scanner";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const QRScanPage = () => {
   const [qrData, setQrData] = useState(null);
@@ -10,18 +11,34 @@ const QRScanPage = () => {
   const videoRef = useRef(null);
 
   // QR 코드 스캔 결과 처리
-  const handleScan = (data) => {
+  const handleScan = async (data) => {
     if (data) {
       try {
         const parsedData = JSON.parse(data);
         setQrData(parsedData); // QR 데이터 저장
-        navigate("/QRDataPage", { state: { qrData: parsedData } }); // 다음 페이지로 이동
+
+        // 서버로 데이터 전송
+        try {
+          const response = await axios.post("http://localhost:3000/api/v1/user/gallery", {
+            userId: 1,
+            galleryId: 2,
+          });
+
+          console.log("서버 응답:", response.data);
+
+          // 서버 응답 데이터를 포함하여 다음 페이지로 이동
+          navigate("/QRDataPage", { state: { qrData: response} });
+        } catch (error) {
+          console.error("서버 요청 실패:", error);
+          setQrError(true);
+        }
       } catch (error) {
         console.error("QR 데이터 파싱 실패:", error);
         setQrError(true);
       }
     }
   };
+
 
   useEffect(() => {
     QrScanner.hasCamera().then((hasCamera) => {
@@ -97,7 +114,6 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #f9f9f9;
 `;
 
 const Header = styled.div`
