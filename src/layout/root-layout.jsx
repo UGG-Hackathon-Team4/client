@@ -32,6 +32,7 @@ const MainContainer = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+  background-color: #FFF8F0;
 `;
 
 const Header = styled.header`
