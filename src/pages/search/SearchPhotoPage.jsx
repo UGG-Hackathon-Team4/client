@@ -83,10 +83,11 @@ function FileUpload() {
                         width: '250px',
                         height: 'auto',
                         cursor: 'pointer',
-                        backgroundColor: '#D9D9D9',
+                        backgroundColor: 'white',
                         padding: '60px',
                         borderRadius: '10px',
-                        marginTop: '15px'
+                        marginTop: '15px',
+                        border:'2px solid #ddd'
                     }}
                 />
             </div>

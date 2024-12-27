@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom'; // useNavigate 임포트
+import { useEffect } from 'react';
+import axios from 'axios';
 
 // 스타일 정의
 const CardSliderContainer = styled.div`
@@ -118,52 +120,69 @@ const Title = styled.h1`
 `;
 
 function CardSlider() {
+  const [serverCards, setServerCards] = useState([]); // 서버에서 가져온 데이터 저장
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState(null);
-  const [isLiked, setIsLiked] = useState(false); // 좋아요 상태 관리
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const [isLiked, setIsLiked] = useState(false);
+  const navigate = useNavigate();
 
+  // 기존 이미지와 기본 데이터
   const cards = [
     {
       id: 1,
-      title: '모나리자러버S2',
-      image: 'https://img.wkorea.com/w/2024/05/style_6641b1396e954-913x1400.jpg',
-      description:
-        '다빈치의 모나리자는 프랑스 루브르 박물관에서 가장 인기 있는 회화작품이다. 수많은 관람객의 감상평은 제각각이다.',
+      image: "https://img.wkorea.com/w/2024/05/style_6641b1396e954-913x1400.jpg",
     },
     {
       id: 2,
-      title: '루브루초보',
-      image: 'https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2022%2F05%2Fmona-lisa-smeared-with-cake-by-climate-change-activist-01.jpg?q=90&w=1400&cbr=1&fit=max',
-      description:
-        '모나리자가 이빨을 드러내지 않고 미소를 짓고 있는 이유를 그 당시 시대상과 연관 지어 이야기하기도 한다. 당시에는 위생 관념의 부재와 적절한 치과 치료가 이루어지지 않아서, 다들 치아 상태가 좋지 않았다. 따라서 귀족들은 웃을 때 이빨을 드러내지 않은 채 입을 다물고 미소를 짓는 것이 예의라고 생각했다. 모나리자의 알 수 없는 미소도 다 빈치의 치밀한 계산이라기보다는 단순히 그 때 그 모델이 그 표정을 짓고 있었기 때문일지도 모른다.'
+      image: "https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2022%2F05%2Fmona-lisa-smeared-with-cake-by-climate-change-activist-01.jpg?q=90&w=1400&cbr=1&fit=max",
     },
     {
       id: 3,
-      title: '방구석미술관',
-      image:
-        'https://s3.ap-northeast-2.amazonaws.com/img.kormedi.com/news/article/__icsFiles/artimage/2018/04/13/c_km601/5957354_540.jpg',
-      description:
-        '모나리자의 미소에서는 83%의 행복, 9%의 혐오감, 6%의 두려움이 담겨 있다.',
+      image: "https://s3.ap-northeast-2.amazonaws.com/img.kormedi.com/news/article/__icsFiles/artimage/2018/04/13/c_km601/5957354_540.jpg",
     },
   ];
+
+  // 기본 이미지
+  const defaultImage = "https://via.placeholder.com/300";
+
+  // 서버에서 데이터 가져오기
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/v1/comment/likes");
+      console.log("서버 데이터:", response.data);
+
+      // 서버에서 가져온 데이터와 기존 이미지 배열의 길이를 맞추기
+      const transformedCards = response.data.success.map((item, index) => ({
+        ...item,
+        image: cards[index]?.image || defaultImage, // 이미지가 없으면 기본 이미지 사용
+      }));
+
+      setServerCards(transformedCards); // 상태에 저장
+    } catch (error) {
+      console.error("데이터 가져오기 실패:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
   };
 
   const nextCard = () => {
-    setSwipeDirection('right');
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    setSwipeDirection("right");
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % serverCards.length);
   };
 
   const prevCard = () => {
-    setSwipeDirection('left');
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
+    setSwipeDirection("left");
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + serverCards.length) % serverCards.length);
   };
 
   const handleButtonClick = () => {
-    navigate('/AlreadyReviewPage'); // 페이지 이동
+    navigate("/AlreadyReviewPage");
   };
 
   const swipeHandlers = useSwipeable({
@@ -179,24 +198,30 @@ function CardSlider() {
         <Title>[모나리자]의 감상평</Title>
       </Header>
 
-      <Card>
-        <HeartButton
-          src={isLiked ? "/redHeart.png" : "/heart.png"}
-          alt="좋아요 버튼"
-          onClick={toggleLike}
-        />
-        <CardImage src={cards[currentIndex].image} alt={cards[currentIndex].title} />
-        <CardContent>
-          <CardTitle>{cards[currentIndex].title}</CardTitle>
-          <CardDescription>{cards[currentIndex].description}</CardDescription>
-        </CardContent>
-      </Card>
+      {serverCards.length > 0 ? (
+        <Card>
+          <HeartButton
+            src={isLiked ? "/redHeart.png" : "/heart.png"}
+            alt="좋아요 버튼"
+            onClick={toggleLike}
+          />
+          <CardImage src={serverCards[currentIndex].image} alt={`Card ${currentIndex}`} />
+          <CardContent>
+            <CardTitle>{serverCards[currentIndex]?.artwork?.title || "제목 없음"}</CardTitle>
+            <CardDescription>
+              {serverCards[currentIndex]?.description || "설명이 없습니다."}
+            </CardDescription>
+          </CardContent>
+        </Card>
+      ) : (
+        <p>로딩 중...</p>
+      )}
 
       <Button onClick={handleButtonClick}>감상평 적기</Button>
       {swipeDirection && (
-        <SwipeIcons visible isLeft={swipeDirection === 'left'}>
+        <SwipeIcons visible isLeft={swipeDirection === "left"}>
           <SwipeIcon
-            src={swipeDirection === 'left' ? 'ic_arrow_left.png' : 'ic_arrow_right.png'}
+            src={swipeDirection === "left" ? "ic_arrow_left.png" : "ic_arrow_right.png"}
             alt="스와이프 아이콘"
           />
         </SwipeIcons>

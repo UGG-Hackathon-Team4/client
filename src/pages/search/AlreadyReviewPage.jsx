@@ -1,18 +1,41 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // useNavigate 훅을 임포트
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // axios 추가
 
 const ReviewPage = () => {
-  const [selectedOption, setSelectedOption] = useState("feedback"); // 초기 상태: 'feedback'
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const [selectedOption, setSelectedOption] = useState("feedback");
+  const [description, setDescription] = useState(""); // description 상태 추가
+  const navigate = useNavigate();
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
 
-  const handleSubmit = () => {
-    // 작성 완료 후 '/CardView'로 이동
-    navigate("/CardSlider");
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value); // 텍스트 입력 상태 업데이트
+  };
+
+  const handleSubmit = async () => {
+    if (!description.trim()) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/v1/comment/add", {
+        userId: 1,
+        artworkId: 2,
+        description,
+      });
+      console.log("서버 응답:", response.data);
+
+      // 작성 완료 후 '/CardSlider'로 이동
+      navigate("/CardSlider");
+    } catch (e) {
+      console.error("Error posting comment:", e);
+      alert("댓글 작성에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
@@ -36,10 +59,12 @@ const ReviewPage = () => {
           </OptionWrapper>
         </Question>
         <Textarea
+          value={description} // 상태와 연동
+          onChange={handleDescriptionChange}
           placeholder={
             selectedOption === "feedback"
-              ? "텍스트를 입력해주세요"
-              : "텍스트를 입력해주세요"
+              ? "의견을 입력해주세요."
+              : "감상을 입력해주세요."
           }
         />
       </Container>
@@ -58,7 +83,6 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-
 `;
 
 const Header = styled.h1`
@@ -83,17 +107,6 @@ const Question = styled.label`
   font-weight: bold;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 5px 0;
-  border: none;
-  border-bottom: 2px solid black;
-  font-size: 14px;
-  margin-bottom: 30px;
-  box-sizing: border-box;
-  background: transparent;
-`;
-
 const Textarea = styled.textarea`
   margin-top: 15px;
   width: 100%;
@@ -103,8 +116,6 @@ const Textarea = styled.textarea`
   border-radius: 5px;
   font-size: 14px;
   resize: none;
-  margin-bottom: 20px;
-  box-sizing: border-box;
   margin-bottom: 150px;
 `;
 
