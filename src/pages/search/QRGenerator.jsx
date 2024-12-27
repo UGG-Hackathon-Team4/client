@@ -3,29 +3,25 @@ import QRCode from "qrcode";
 import styled from "styled-components";
 
 const QRGenerator = () => {
-  const [text, setText] = useState("");
   const [qrCode, setQrCode] = useState("");
 
   const generateQRCode = async () => {
     try {
-      const url = await QRCode.toDataURL(text);
+      const fixedData = JSON.stringify({
+        event: "전시회",
+        location: "서울",
+        date: "2024-12-31",
+      });
+      const url = await QRCode.toDataURL(fixedData);
       setQrCode(url);
     } catch (error) {
       console.error("Failed to generate QR Code", error);
     }
   };
 
-  //setText(JSON.stringify({ event: "전시회", location: "서울", date: "2024-12-31" }));
-  
   return (
     <Container>
       <Header>QR 코드 생성기</Header>
-      <Input
-        type="text"
-        placeholder="QR에 담을 텍스트를 입력하세요"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
       <Button onClick={generateQRCode}>QR 코드 생성</Button>
       {qrCode && (
         <QRCodeImage>
@@ -49,15 +45,6 @@ const Container = styled.div`
 const Header = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
-`;
-
-const Input = styled.input`
-  width: 300px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
 `;
 
 const Button = styled.button`

@@ -1,30 +1,38 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const QRDataPage = () => {
-    const navigate = useNavigate();
-    const handleNavigate = ()=>{
-        navigate('/SearchPhotoPage');
-    }
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // QRData를 state로부터 가져옴
+  const qrData = location.state?.qrData || { event: "데이터 없음", location: "알 수 없음", date: "알 수 없음" };
+
+  const handleNavigate = () => {
+    navigate("/SearchPhotoPage");
+  };
+
   return (
     <MainContainer>
       <Header>
-        <Title>"전시명"</Title>
+        <Title>{qrData.event || "전시명"}</Title>
         <Subtitle>전시에 오신 것을 환영합니다!</Subtitle>
       </Header>
       <ExhibitionInfo>
         <InfoRow>
           <Label>전시명</Label>
-          <Value>작기명</Value>
+          <Value>{qrData.event}</Value>
         </InfoRow>
         <InfoRow>
           <Label>QR 찍은 날짜</Label>
-          <Value>전시 장소</Value>
+          <Value>{qrData.date}</Value>
+        </InfoRow>
+        <InfoRow>
+          <Label>전시 장소</Label>
+          <Value>{qrData.location}</Value>
         </InfoRow>
       </ExhibitionInfo>
-      <Notice>
-        작품을 찍으면 감상 팁을 확인할 수 있어요!
-      </Notice>
+      <Notice>작품을 찍으면 감상 팁을 확인할 수 있어요!</Notice>
       <ActionButton onClick={handleNavigate}>작품 함께보기</ActionButton>
     </MainContainer>
   );

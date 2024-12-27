@@ -15,7 +15,7 @@ const QRScanPage = () => {
       try {
         const parsedData = JSON.parse(data);
         setQrData(parsedData); // QR 데이터 저장
-        navigate("/nextPage", { state: { qrData: parsedData } }); // 다음 페이지로 이동
+        navigate("/QRDataPage", { state: { qrData: parsedData } }); // 다음 페이지로 이동
       } catch (error) {
         console.error("QR 데이터 파싱 실패:", error);
         setQrError(true);

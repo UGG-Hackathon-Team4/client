@@ -73,7 +73,7 @@ const HomeButton = styled.button`
 `;
 
 const ContentWrapper = styled.div`
-  margin-top: ${({ shouldHideHeader }) => (shouldHideHeader ? "0" : "60px")}; /* Header가 없으면 margin-top 제거 */
+  margin-top: ${({ shouldHideHeader }) => (shouldHideHeader ? "0" : "60px")}; 
   flex: 1;
   overflow-y: auto; /* 콘텐츠가 길 경우 스크롤 가능 */
   padding-top: 20px; /* 내부 콘텐츠에 간격 추가 */

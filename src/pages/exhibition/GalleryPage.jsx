@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import PhotoItem from "../../components/PhotoItem";
-
+import { useNavigate } from "react-router-dom";
 
 const GalleryPage = () => {
+  const naivgate = useNavigate();
+  const handleNavigate = ()=>{
+    naivgate('/ReviewPage');
+  }
+
   return (
     <MainContainer>
       <Header>
         <HeadText>전시회명</HeadText>
-        <AddPhotoButton>+ 작품 추가</AddPhotoButton>
+        <AddPhotoButton onClick={handleNavigate}>+ 작품 추가</AddPhotoButton>
       </Header>
       <PhotoList>
         {[1, 2, 3, 4].map((title, index) => (

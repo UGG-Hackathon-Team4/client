@@ -24,7 +24,7 @@ const MainPage = () => {
 
       <ButtonContainer>
         <LoginButton onClick={handleOnClick}>로그인</LoginButton>
-        <LoginButton onClick={handleOnClick}>전시 등록(주최사)</LoginButton>
+        <LoginButton >전시 등록(주최사)</LoginButton>
       </ButtonContainer>
     </MainContainer>
   );
@@ -39,7 +39,7 @@ const MainContainer = styled.div`
   gap: 200px;
   width: 100vw;
   height: 100vh;
-  background-color: #f9f9f9;
+
   padding: 20px;
   box-sizing: border-box;
 `;
@@ -64,7 +64,7 @@ const TextContainer = styled.div`
 `;
 
 const Subtitle = styled.p`
-  font-size: 14px;
+  font-size: 20px;
   color: #666;
   margin: 0;
 `;
@@ -87,22 +87,21 @@ const ButtonContainer = styled.div`
 `;
 
 const LoginButton = styled.button`
-  width: 80%;
+  width: 315px;
   max-width: 300px;
   padding: 15px 0;
   font-size: 16px;
-  color: #fff;
-  background-color: #4caf50;
+  color: black;
+  background-color: #F3C3B7;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  
 
   &:hover {
-    background-color: #45a049;
+    background-color: #D99E8F;
   }
 
   &:active {
-    background-color: #3e8e41;
+    background-color: #D99E8F;
   }
 `;
